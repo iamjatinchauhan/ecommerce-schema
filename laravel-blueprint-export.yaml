@@ -1,0 +1,97 @@
+models:
+    Supplier:
+        id: false
+        supplier_id: bigInteger primary
+        supplier_name: char
+        product_name: char
+        product_id: bigInteger primary
+        category_id: bigInteger unique
+        price: integer
+        description: string
+        stock: bigInteger
+    Order:
+        id: false
+        customer_id: bigInteger primary
+        order_date: timestampTz
+        total_items: integer
+    Payment:
+        id: false
+        transaction_id: integer primary
+        status: boolean
+        payment_date: time
+        payment_amount: float
+    Cart:
+        id: false
+        order_id: bigInteger unique
+        product_id: bigInteger
+        cart_value: integer
+        billing_address: string
+        quantity: integer
+    Category:
+        id: false
+        product_id: bigInteger unique
+        category_id: integer
+        name: char index
+        description: string nullable
+        thumbnail: uuid
+        indexes:
+            - index: name, description
+            - index: name
+    Tag:
+        id: false
+        category_id: integer unique
+        category_type: char
+        product_type: char
+    AffiliateProgram:
+        id: false
+        affiliation_id: bigInteger primary
+        total_affiliation: integer
+        tag: string
+        total_product_affiliation: integer
+    UserCredential:
+        id: false
+        cutomer_id: bigInteger primary
+        email_id: string
+        link_id: integer
+    Customer:
+        id: false
+        customer_id: bigInteger primary
+        first_name: char
+        last_name: char
+        status: timestampTz
+    LoginMenu:
+        id: false
+        link_id: integer primary
+        password: string index
+        user_address: string
+    Product:
+        id: false
+        product_id: bigInteger unique
+        name: char
+        price: integer
+        origin_country: char
+        image: enum
+        create_date: date
+        stock: integer
+        indexes:
+            - index: product_id, name
+    Invoice:
+        id: false
+        transaction_id: bigInteger primary
+        order_id: bigInteger
+        time_date: time
+        seller: string
+    SkinCare:
+        id: false
+        product_id: bigInteger primary
+        brand: char
+        stock: integer
+        product_type: string
+        price: integer
+    Electronic:
+        id: false
+        product_id: bigInteger primary
+        brand: char
+        stock: integer
+        product_model: string
+        price: integer
